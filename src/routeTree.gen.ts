@@ -23,6 +23,9 @@ import { Route as AppApplicationsRouteImport } from './routes/_app.applications'
 import { Route as AppAnalyticsRouteImport } from './routes/_app.analytics'
 import { Route as AppCompanyInternshipsRouteImport } from './routes/_app.company.internships'
 import { Route as AppCompanyApplicantsRouteImport } from './routes/_app.company.applicants'
+import { Route as AppAdminStudentsRouteImport } from './routes/_app.admin.students'
+import { Route as AppAdminInternshipsRouteImport } from './routes/_app.admin.internships'
+import { Route as AppAdminCompaniesRouteImport } from './routes/_app.admin.companies'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -93,6 +96,21 @@ const AppCompanyApplicantsRoute = AppCompanyApplicantsRouteImport.update({
   path: '/company/applicants',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAdminStudentsRoute = AppAdminStudentsRouteImport.update({
+  id: '/admin/students',
+  path: '/admin/students',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminInternshipsRoute = AppAdminInternshipsRouteImport.update({
+  id: '/admin/internships',
+  path: '/admin/internships',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminCompaniesRoute = AppAdminCompaniesRouteImport.update({
+  id: '/admin/companies',
+  path: '/admin/companies',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -106,6 +124,9 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AppProfileRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
+  '/admin/companies': typeof AppAdminCompaniesRoute
+  '/admin/internships': typeof AppAdminInternshipsRoute
+  '/admin/students': typeof AppAdminStudentsRoute
   '/company/applicants': typeof AppCompanyApplicantsRoute
   '/company/internships': typeof AppCompanyInternshipsRoute
 }
@@ -121,6 +142,9 @@ export interface FileRoutesByTo {
   '/profile': typeof AppProfileRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
+  '/admin/companies': typeof AppAdminCompaniesRoute
+  '/admin/internships': typeof AppAdminInternshipsRoute
+  '/admin/students': typeof AppAdminStudentsRoute
   '/company/applicants': typeof AppCompanyApplicantsRoute
   '/company/internships': typeof AppCompanyInternshipsRoute
 }
@@ -138,6 +162,9 @@ export interface FileRoutesById {
   '/_app/profile': typeof AppProfileRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
+  '/_app/admin/companies': typeof AppAdminCompaniesRoute
+  '/_app/admin/internships': typeof AppAdminInternshipsRoute
+  '/_app/admin/students': typeof AppAdminStudentsRoute
   '/_app/company/applicants': typeof AppCompanyApplicantsRoute
   '/_app/company/internships': typeof AppCompanyInternshipsRoute
 }
@@ -155,6 +182,9 @@ export interface FileRouteTypes {
     | '/profile'
     | '/apply/$id'
     | '/internships/$id'
+    | '/admin/companies'
+    | '/admin/internships'
+    | '/admin/students'
     | '/company/applicants'
     | '/company/internships'
   fileRoutesByTo: FileRoutesByTo
@@ -170,6 +200,9 @@ export interface FileRouteTypes {
     | '/profile'
     | '/apply/$id'
     | '/internships/$id'
+    | '/admin/companies'
+    | '/admin/internships'
+    | '/admin/students'
     | '/company/applicants'
     | '/company/internships'
   id:
@@ -186,6 +219,9 @@ export interface FileRouteTypes {
     | '/_app/profile'
     | '/apply/$id'
     | '/internships/$id'
+    | '/_app/admin/companies'
+    | '/_app/admin/internships'
+    | '/_app/admin/students'
     | '/_app/company/applicants'
     | '/_app/company/internships'
   fileRoutesById: FileRoutesById
@@ -299,6 +335,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCompanyApplicantsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/admin/students': {
+      id: '/_app/admin/students'
+      path: '/admin/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AppAdminStudentsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/admin/internships': {
+      id: '/_app/admin/internships'
+      path: '/admin/internships'
+      fullPath: '/admin/internships'
+      preLoaderRoute: typeof AppAdminInternshipsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/admin/companies': {
+      id: '/_app/admin/companies'
+      path: '/admin/companies'
+      fullPath: '/admin/companies'
+      preLoaderRoute: typeof AppAdminCompaniesRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -308,6 +365,9 @@ interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppProfileRoute: typeof AppProfileRoute
+  AppAdminCompaniesRoute: typeof AppAdminCompaniesRoute
+  AppAdminInternshipsRoute: typeof AppAdminInternshipsRoute
+  AppAdminStudentsRoute: typeof AppAdminStudentsRoute
   AppCompanyApplicantsRoute: typeof AppCompanyApplicantsRoute
   AppCompanyInternshipsRoute: typeof AppCompanyInternshipsRoute
 }
@@ -318,6 +378,9 @@ const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppNotificationsRoute: AppNotificationsRoute,
   AppProfileRoute: AppProfileRoute,
+  AppAdminCompaniesRoute: AppAdminCompaniesRoute,
+  AppAdminInternshipsRoute: AppAdminInternshipsRoute,
+  AppAdminStudentsRoute: AppAdminStudentsRoute,
   AppCompanyApplicantsRoute: AppCompanyApplicantsRoute,
   AppCompanyInternshipsRoute: AppCompanyInternshipsRoute,
 }
