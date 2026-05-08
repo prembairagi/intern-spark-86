@@ -17,6 +17,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as InternshipsIdRouteImport } from './routes/internships.$id'
 import { Route as ApplyIdRouteImport } from './routes/apply.$id'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppApplicationsRouteImport } from './routes/_app.applications'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -57,12 +58,18 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AppApplicationsRoute = AppApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/internships': typeof InternshipsRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/applications': typeof AppApplicationsRoute
   '/dashboard': typeof AppDashboardRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByTo {
   '/internships': typeof InternshipsRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/applications': typeof AppApplicationsRoute
   '/dashboard': typeof AppDashboardRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   '/internships': typeof InternshipsRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/_app/applications': typeof AppApplicationsRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
     | '/internships'
     | '/login'
     | '/register'
+    | '/applications'
     | '/dashboard'
     | '/apply/$id'
     | '/internships/$id'
@@ -103,6 +113,7 @@ export interface FileRouteTypes {
     | '/internships'
     | '/login'
     | '/register'
+    | '/applications'
     | '/dashboard'
     | '/apply/$id'
     | '/internships/$id'
@@ -113,6 +124,7 @@ export interface FileRouteTypes {
     | '/internships'
     | '/login'
     | '/register'
+    | '/_app/applications'
     | '/_app/dashboard'
     | '/apply/$id'
     | '/internships/$id'
@@ -185,14 +197,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/applications': {
+      id: '/_app/applications'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof AppApplicationsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppApplicationsRoute: typeof AppApplicationsRoute
   AppDashboardRoute: typeof AppDashboardRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppApplicationsRoute: AppApplicationsRoute,
   AppDashboardRoute: AppDashboardRoute,
 }
 
