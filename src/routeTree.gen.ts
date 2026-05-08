@@ -20,6 +20,7 @@ import { Route as AppProfileRouteImport } from './routes/_app.profile'
 import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppApplicationsRouteImport } from './routes/_app.applications'
+import { Route as AppAnalyticsRouteImport } from './routes/_app.analytics'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -75,12 +76,18 @@ const AppApplicationsRoute = AppApplicationsRouteImport.update({
   path: '/applications',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/internships': typeof InternshipsRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/analytics': typeof AppAnalyticsRoute
   '/applications': typeof AppApplicationsRoute
   '/dashboard': typeof AppDashboardRoute
   '/notifications': typeof AppNotificationsRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/internships': typeof InternshipsRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/analytics': typeof AppAnalyticsRoute
   '/applications': typeof AppApplicationsRoute
   '/dashboard': typeof AppDashboardRoute
   '/notifications': typeof AppNotificationsRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/internships': typeof InternshipsRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/_app/analytics': typeof AppAnalyticsRoute
   '/_app/applications': typeof AppApplicationsRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/notifications': typeof AppNotificationsRoute
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/internships'
     | '/login'
     | '/register'
+    | '/analytics'
     | '/applications'
     | '/dashboard'
     | '/notifications'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/internships'
     | '/login'
     | '/register'
+    | '/analytics'
     | '/applications'
     | '/dashboard'
     | '/notifications'
@@ -146,6 +157,7 @@ export interface FileRouteTypes {
     | '/internships'
     | '/login'
     | '/register'
+    | '/_app/analytics'
     | '/_app/applications'
     | '/_app/dashboard'
     | '/_app/notifications'
@@ -242,10 +254,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppApplicationsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/analytics': {
+      id: '/_app/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
   AppApplicationsRoute: typeof AppApplicationsRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
@@ -253,6 +273,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAnalyticsRoute: AppAnalyticsRoute,
   AppApplicationsRoute: AppApplicationsRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppNotificationsRoute: AppNotificationsRoute,
