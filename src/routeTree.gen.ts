@@ -21,6 +21,7 @@ import { Route as AppNotificationsRouteImport } from './routes/_app.notification
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppApplicationsRouteImport } from './routes/_app.applications'
 import { Route as AppAnalyticsRouteImport } from './routes/_app.analytics'
+import { Route as AppCompanyInternshipsRouteImport } from './routes/_app.company.internships'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -81,6 +82,11 @@ const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCompanyInternshipsRoute = AppCompanyInternshipsRouteImport.update({
+  id: '/company/internships',
+  path: '/company/internships',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AppProfileRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
+  '/company/internships': typeof AppCompanyInternshipsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/profile': typeof AppProfileRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
+  '/company/internships': typeof AppCompanyInternshipsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/_app/profile': typeof AppProfileRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
+  '/_app/company/internships': typeof AppCompanyInternshipsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/apply/$id'
     | '/internships/$id'
+    | '/company/internships'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/apply/$id'
     | '/internships/$id'
+    | '/company/internships'
   id:
     | '__root__'
     | '/'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/_app/profile'
     | '/apply/$id'
     | '/internships/$id'
+    | '/_app/company/internships'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -261,6 +273,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAnalyticsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/company/internships': {
+      id: '/_app/company/internships'
+      path: '/company/internships'
+      fullPath: '/company/internships'
+      preLoaderRoute: typeof AppCompanyInternshipsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -270,6 +289,7 @@ interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppProfileRoute: typeof AppProfileRoute
+  AppCompanyInternshipsRoute: typeof AppCompanyInternshipsRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -278,6 +298,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppNotificationsRoute: AppNotificationsRoute,
   AppProfileRoute: AppProfileRoute,
+  AppCompanyInternshipsRoute: AppCompanyInternshipsRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
