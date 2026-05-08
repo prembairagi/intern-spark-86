@@ -16,6 +16,7 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as InternshipsIdRouteImport } from './routes/internships.$id'
 import { Route as ApplyIdRouteImport } from './routes/apply.$id'
+import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppApplicationsRouteImport } from './routes/_app.applications'
 
@@ -53,6 +54,11 @@ const ApplyIdRoute = ApplyIdRouteImport.update({
   path: '/apply/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/applications': typeof AppApplicationsRoute
   '/dashboard': typeof AppDashboardRoute
+  '/notifications': typeof AppNotificationsRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
 }
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/applications': typeof AppApplicationsRoute
   '/dashboard': typeof AppDashboardRoute
+  '/notifications': typeof AppNotificationsRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
 }
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/_app/applications': typeof AppApplicationsRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/notifications': typeof AppNotificationsRoute
   '/apply/$id': typeof ApplyIdRoute
   '/internships/$id': typeof InternshipsIdRoute
 }
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/applications'
     | '/dashboard'
+    | '/notifications'
     | '/apply/$id'
     | '/internships/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/applications'
     | '/dashboard'
+    | '/notifications'
     | '/apply/$id'
     | '/internships/$id'
   id:
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/_app/applications'
     | '/_app/dashboard'
+    | '/_app/notifications'
     | '/apply/$id'
     | '/internships/$id'
   fileRoutesById: FileRoutesById
@@ -190,6 +202,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApplyIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/notifications': {
+      id: '/_app/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
@@ -210,11 +229,13 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppApplicationsRoute: typeof AppApplicationsRoute
   AppDashboardRoute: typeof AppDashboardRoute
+  AppNotificationsRoute: typeof AppNotificationsRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppApplicationsRoute: AppApplicationsRoute,
   AppDashboardRoute: AppDashboardRoute,
+  AppNotificationsRoute: AppNotificationsRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
