@@ -14,6 +14,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as InternshipsRouteImport } from './routes/internships'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InternshipsIdRouteImport } from './routes/internships.$id'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -40,6 +41,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InternshipsIdRoute = InternshipsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => InternshipsRoute,
+} as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -48,32 +54,47 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/internships': typeof InternshipsRoute
+  '/internships': typeof InternshipsRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/dashboard': typeof AppDashboardRoute
+  '/internships/$id': typeof InternshipsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/internships': typeof InternshipsRoute
+  '/internships': typeof InternshipsRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/dashboard': typeof AppDashboardRoute
+  '/internships/$id': typeof InternshipsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
-  '/internships': typeof InternshipsRoute
+  '/internships': typeof InternshipsRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/internships/$id': typeof InternshipsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/internships' | '/login' | '/register' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/internships'
+    | '/login'
+    | '/register'
+    | '/dashboard'
+    | '/internships/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/internships' | '/login' | '/register' | '/dashboard'
+  to:
+    | '/'
+    | '/internships'
+    | '/login'
+    | '/register'
+    | '/dashboard'
+    | '/internships/$id'
   id:
     | '__root__'
     | '/'
@@ -82,12 +103,13 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/_app/dashboard'
+    | '/internships/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
-  InternshipsRoute: typeof InternshipsRoute
+  InternshipsRoute: typeof InternshipsRouteWithChildren
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
 }
@@ -129,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/internships/$id': {
+      id: '/internships/$id'
+      path: '/$id'
+      fullPath: '/internships/$id'
+      preLoaderRoute: typeof InternshipsIdRouteImport
+      parentRoute: typeof InternshipsRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
@@ -149,10 +178,22 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface InternshipsRouteChildren {
+  InternshipsIdRoute: typeof InternshipsIdRoute
+}
+
+const InternshipsRouteChildren: InternshipsRouteChildren = {
+  InternshipsIdRoute: InternshipsIdRoute,
+}
+
+const InternshipsRouteWithChildren = InternshipsRoute._addFileChildren(
+  InternshipsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
-  InternshipsRoute: InternshipsRoute,
+  InternshipsRoute: InternshipsRouteWithChildren,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
 }
