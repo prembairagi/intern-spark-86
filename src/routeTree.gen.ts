@@ -9,38 +9,262 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as InternshipsRouteImport } from './routes/internships'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InternshipsIdRouteImport } from './routes/internships.$id'
+import { Route as ApplyIdRouteImport } from './routes/apply.$id'
+import { Route as AppProfileRouteImport } from './routes/_app.profile'
+import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
+import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppApplicationsRouteImport } from './routes/_app.applications'
+import { Route as AppAnalyticsRouteImport } from './routes/_app.analytics'
+import { Route as AppCompanyInternshipsRouteImport } from './routes/_app.company.internships'
+import { Route as AppCompanyApplicantsRouteImport } from './routes/_app.company.applicants'
+import { Route as AppAdminStudentsRouteImport } from './routes/_app.admin.students'
+import { Route as AppAdminInternshipsRouteImport } from './routes/_app.admin.internships'
+import { Route as AppAdminCompaniesRouteImport } from './routes/_app.admin.companies'
 
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InternshipsRoute = InternshipsRouteImport.update({
+  id: '/internships',
+  path: '/internships',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InternshipsIdRoute = InternshipsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => InternshipsRoute,
+} as any)
+const ApplyIdRoute = ApplyIdRouteImport.update({
+  id: '/apply/$id',
+  path: '/apply/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppApplicationsRoute = AppApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCompanyInternshipsRoute = AppCompanyInternshipsRouteImport.update({
+  id: '/company/internships',
+  path: '/company/internships',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCompanyApplicantsRoute = AppCompanyApplicantsRouteImport.update({
+  id: '/company/applicants',
+  path: '/company/applicants',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminStudentsRoute = AppAdminStudentsRouteImport.update({
+  id: '/admin/students',
+  path: '/admin/students',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminInternshipsRoute = AppAdminInternshipsRouteImport.update({
+  id: '/admin/internships',
+  path: '/admin/internships',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminCompaniesRoute = AppAdminCompaniesRouteImport.update({
+  id: '/admin/companies',
+  path: '/admin/companies',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/internships': typeof InternshipsRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/analytics': typeof AppAnalyticsRoute
+  '/applications': typeof AppApplicationsRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/notifications': typeof AppNotificationsRoute
+  '/profile': typeof AppProfileRoute
+  '/apply/$id': typeof ApplyIdRoute
+  '/internships/$id': typeof InternshipsIdRoute
+  '/admin/companies': typeof AppAdminCompaniesRoute
+  '/admin/internships': typeof AppAdminInternshipsRoute
+  '/admin/students': typeof AppAdminStudentsRoute
+  '/company/applicants': typeof AppCompanyApplicantsRoute
+  '/company/internships': typeof AppCompanyInternshipsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/internships': typeof InternshipsRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/analytics': typeof AppAnalyticsRoute
+  '/applications': typeof AppApplicationsRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/notifications': typeof AppNotificationsRoute
+  '/profile': typeof AppProfileRoute
+  '/apply/$id': typeof ApplyIdRoute
+  '/internships/$id': typeof InternshipsIdRoute
+  '/admin/companies': typeof AppAdminCompaniesRoute
+  '/admin/internships': typeof AppAdminInternshipsRoute
+  '/admin/students': typeof AppAdminStudentsRoute
+  '/company/applicants': typeof AppCompanyApplicantsRoute
+  '/company/internships': typeof AppCompanyInternshipsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/internships': typeof InternshipsRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/_app/analytics': typeof AppAnalyticsRoute
+  '/_app/applications': typeof AppApplicationsRoute
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/notifications': typeof AppNotificationsRoute
+  '/_app/profile': typeof AppProfileRoute
+  '/apply/$id': typeof ApplyIdRoute
+  '/internships/$id': typeof InternshipsIdRoute
+  '/_app/admin/companies': typeof AppAdminCompaniesRoute
+  '/_app/admin/internships': typeof AppAdminInternshipsRoute
+  '/_app/admin/students': typeof AppAdminStudentsRoute
+  '/_app/company/applicants': typeof AppCompanyApplicantsRoute
+  '/_app/company/internships': typeof AppCompanyInternshipsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/internships'
+    | '/login'
+    | '/register'
+    | '/analytics'
+    | '/applications'
+    | '/dashboard'
+    | '/notifications'
+    | '/profile'
+    | '/apply/$id'
+    | '/internships/$id'
+    | '/admin/companies'
+    | '/admin/internships'
+    | '/admin/students'
+    | '/company/applicants'
+    | '/company/internships'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/internships'
+    | '/login'
+    | '/register'
+    | '/analytics'
+    | '/applications'
+    | '/dashboard'
+    | '/notifications'
+    | '/profile'
+    | '/apply/$id'
+    | '/internships/$id'
+    | '/admin/companies'
+    | '/admin/internships'
+    | '/admin/students'
+    | '/company/applicants'
+    | '/company/internships'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/internships'
+    | '/login'
+    | '/register'
+    | '/_app/analytics'
+    | '/_app/applications'
+    | '/_app/dashboard'
+    | '/_app/notifications'
+    | '/_app/profile'
+    | '/apply/$id'
+    | '/internships/$id'
+    | '/_app/admin/companies'
+    | '/_app/admin/internships'
+    | '/_app/admin/students'
+    | '/_app/company/applicants'
+    | '/_app/company/internships'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  InternshipsRoute: typeof InternshipsRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
+  ApplyIdRoute: typeof ApplyIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/internships': {
+      id: '/internships'
+      path: '/internships'
+      fullPath: '/internships'
+      preLoaderRoute: typeof InternshipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +272,141 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/internships/$id': {
+      id: '/internships/$id'
+      path: '/$id'
+      fullPath: '/internships/$id'
+      preLoaderRoute: typeof InternshipsIdRouteImport
+      parentRoute: typeof InternshipsRoute
+    }
+    '/apply/$id': {
+      id: '/apply/$id'
+      path: '/apply/$id'
+      fullPath: '/apply/$id'
+      preLoaderRoute: typeof ApplyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/profile': {
+      id: '/_app/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/notifications': {
+      id: '/_app/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/applications': {
+      id: '/_app/applications'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof AppApplicationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/analytics': {
+      id: '/_app/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/company/internships': {
+      id: '/_app/company/internships'
+      path: '/company/internships'
+      fullPath: '/company/internships'
+      preLoaderRoute: typeof AppCompanyInternshipsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/company/applicants': {
+      id: '/_app/company/applicants'
+      path: '/company/applicants'
+      fullPath: '/company/applicants'
+      preLoaderRoute: typeof AppCompanyApplicantsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/admin/students': {
+      id: '/_app/admin/students'
+      path: '/admin/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AppAdminStudentsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/admin/internships': {
+      id: '/_app/admin/internships'
+      path: '/admin/internships'
+      fullPath: '/admin/internships'
+      preLoaderRoute: typeof AppAdminInternshipsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/admin/companies': {
+      id: '/_app/admin/companies'
+      path: '/admin/companies'
+      fullPath: '/admin/companies'
+      preLoaderRoute: typeof AppAdminCompaniesRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppApplicationsRoute: typeof AppApplicationsRoute
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppNotificationsRoute: typeof AppNotificationsRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppAdminCompaniesRoute: typeof AppAdminCompaniesRoute
+  AppAdminInternshipsRoute: typeof AppAdminInternshipsRoute
+  AppAdminStudentsRoute: typeof AppAdminStudentsRoute
+  AppCompanyApplicantsRoute: typeof AppCompanyApplicantsRoute
+  AppCompanyInternshipsRoute: typeof AppCompanyInternshipsRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAnalyticsRoute: AppAnalyticsRoute,
+  AppApplicationsRoute: AppApplicationsRoute,
+  AppDashboardRoute: AppDashboardRoute,
+  AppNotificationsRoute: AppNotificationsRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppAdminCompaniesRoute: AppAdminCompaniesRoute,
+  AppAdminInternshipsRoute: AppAdminInternshipsRoute,
+  AppAdminStudentsRoute: AppAdminStudentsRoute,
+  AppCompanyApplicantsRoute: AppCompanyApplicantsRoute,
+  AppCompanyInternshipsRoute: AppCompanyInternshipsRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
+interface InternshipsRouteChildren {
+  InternshipsIdRoute: typeof InternshipsIdRoute
+}
+
+const InternshipsRouteChildren: InternshipsRouteChildren = {
+  InternshipsIdRoute: InternshipsIdRoute,
+}
+
+const InternshipsRouteWithChildren = InternshipsRoute._addFileChildren(
+  InternshipsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  InternshipsRoute: InternshipsRouteWithChildren,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
+  ApplyIdRoute: ApplyIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
