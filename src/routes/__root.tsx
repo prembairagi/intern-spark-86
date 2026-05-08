@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "internship management portal" },
+      { name: "description", content: "An internship management portal for students, companies, and admins." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "internship management portal" },
+      { property: "og:description", content: "An internship management portal for students, companies, and admins." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "internship management portal" },
+      { name: "twitter:description", content: "An internship management portal for students, companies, and admins." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b41c042c-2389-4543-b38c-ef02175535fc/id-preview-b3c82bd6--31fdc87a-8794-4e03-ab9e-b8264d66e658.lovable.app-1778226502198.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b41c042c-2389-4543-b38c-ef02175535fc/id-preview-b3c82bd6--31fdc87a-8794-4e03-ab9e-b8264d66e658.lovable.app-1778226502198.png" },
     ],
     links: [
       {
