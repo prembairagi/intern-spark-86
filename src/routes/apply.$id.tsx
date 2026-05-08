@@ -85,7 +85,7 @@ function ApplyPage() {
         <h1 className="text-2xl font-semibold">Apply to {internship.title}</h1>
         <p className="mt-1 text-sm text-muted-foreground">at {internship.companyName} · {internship.location}</p>
 
-        <form onSubmit={submit} className="mt-6 space-y-5 rounded-2xl border border-border/60 bg-card p-6">
+        <form onSubmit={submit} className="animate-fade-in mt-6 space-y-5 rounded-2xl border border-border/60 bg-card p-6 shadow-[var(--shadow-soft)]">
           <div className="space-y-1.5">
             <Label>Cover letter</Label>
             <Textarea rows={6} placeholder="Why are you a great fit for this role?" value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} />
