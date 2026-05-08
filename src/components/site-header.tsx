@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 export function SiteHeader() {
   const { user, logout } = useAuth();
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur">
+    <header className="glass sticky top-0 z-40 w-full border-b border-border/60">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" className="flex items-center gap-2 font-semibold text-foreground">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+        <Link to="/" className="group flex items-center gap-2 font-semibold text-foreground">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-primary-foreground shadow-md transition-transform group-hover:scale-105">
             <Briefcase className="h-5 w-5" />
           </span>
           InternHub

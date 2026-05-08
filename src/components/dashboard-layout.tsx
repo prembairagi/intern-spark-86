@@ -77,16 +77,26 @@ function AppSidebar() {
           <SidebarGroupLabel>{user.role.toUpperCase()}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.to}>
-                  <SidebarMenuButton asChild isActive={pathname === item.to}>
-                    <Link to={item.to} className="flex items-center gap-2">
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.label}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {items.map((item) => {
+                const active = pathname === item.to;
+                return (
+                  <SidebarMenuItem key={item.to}>
+                    <SidebarMenuButton asChild isActive={active}>
+                      <Link
+                        to={item.to}
+                        className={`flex items-center gap-2 rounded-md transition-colors ${
+                          active
+                            ? "bg-primary/10 text-primary font-medium"
+                            : "hover:bg-sidebar-accent/60"
+                        }`}
+                      >
+                        <item.icon className="h-4 w-4" />
+                        <span>{item.label}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -128,22 +138,22 @@ export function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-muted/30">
+      <div className="flex min-h-screen w-full bg-gradient-to-br from-muted/40 via-background to-muted/30">
         <AppSidebar />
         <div className="flex flex-1 flex-col">
-          <header className="sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-border/60 bg-background/90 px-4 backdrop-blur">
-            <SidebarTrigger>
+          <header className="glass sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-border/60 px-4">
+            <SidebarTrigger className="hover:bg-accent/60">
               <Menu className="h-4 w-4" />
             </SidebarTrigger>
             <div className="flex-1" />
             <div className="flex items-center gap-3 text-sm">
               <span className="hidden text-muted-foreground sm:inline">{user.email}</span>
-              <Button asChild size="sm" variant="outline">
+              <Button asChild size="sm" variant="outline" className="hover-lift">
                 <Link to="/profile">{user.name.split(" ")[0]}</Link>
               </Button>
             </div>
           </header>
-          <main className="flex-1 p-4 sm:p-6 lg:p-8">
+          <main key={user.id} className="animate-fade-in flex-1 p-4 sm:p-6 lg:p-8">
             <Outlet />
           </main>
         </div>

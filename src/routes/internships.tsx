@@ -96,12 +96,16 @@ function InternshipsPage() {
         <EmptyState title="No matches" description="Try clearing some filters to see more roles." />
       ) : (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((i) => (
-            <article key={i.id} className="flex flex-col rounded-xl border border-border/60 bg-card p-5 shadow-[var(--shadow-soft)] transition hover:shadow-[var(--shadow-elevated)]">
+          {filtered.map((i, idx) => (
+            <article
+              key={i.id}
+              className="hover-lift group flex flex-col rounded-xl border border-border/60 bg-card p-5 shadow-[var(--shadow-soft)] animate-fade-in"
+              style={{ animationDelay: `${Math.min(idx, 8) * 50}ms` }}
+            >
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <div className="text-xs font-medium text-muted-foreground">{i.companyName}</div>
-                  <h3 className="mt-1 text-lg font-semibold leading-tight">{i.title}</h3>
+                  <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{i.companyName}</div>
+                  <h3 className="mt-1 text-lg font-semibold leading-tight transition-colors group-hover:text-primary">{i.title}</h3>
                 </div>
                 <Badge variant="secondary">{i.domain}</Badge>
               </div>
@@ -110,10 +114,10 @@ function InternshipsPage() {
                 <span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" />{i.durationWeeks} weeks</span>
                 <span className="inline-flex items-center gap-1"><IndianRupee className="h-3 w-3" />{i.stipend.toLocaleString()}/mo</span>
               </div>
-              <p className="mt-3 line-clamp-3 text-sm text-muted-foreground">{i.description}</p>
+              <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{i.description}</p>
               <div className="mt-auto flex items-center justify-between pt-4">
                 <Badge variant="outline">{i.mode}</Badge>
-                <Button asChild size="sm">
+                <Button asChild size="sm" className="hover-lift">
                   <Link to="/internships/$id" params={{ id: i.id }}>View role</Link>
                 </Button>
               </div>
