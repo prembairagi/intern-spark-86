@@ -32,24 +32,25 @@ function Index() {
         {/* Hero */}
         <section className="relative overflow-hidden">
           <div
-            className="absolute inset-0 -z-10 opacity-90"
+            className="absolute inset-0 -z-10"
             style={{ background: "var(--gradient-hero)" }}
           />
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.18),transparent_55%),radial-gradient(circle_at_80%_60%,rgba(255,255,255,0.12),transparent_50%)]" />
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
-            <div className="max-w-3xl text-primary-foreground">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-medium backdrop-blur">
+            <div className="max-w-3xl text-primary-foreground animate-fade-in">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/15 px-3 py-1 text-xs font-medium backdrop-blur">
                 <Sparkles className="h-3.5 w-3.5" /> Built for students, companies and campus admins
               </span>
-              <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-                Internships, organized end-to-end.
+              <h1 className="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+                Internships, organized<br />end-to-end.
               </h1>
-              <p className="mt-5 max-w-2xl text-lg text-primary-foreground/85">
+              <p className="mt-5 max-w-2xl text-lg text-primary-foreground/90">
                 InternHub is a complete portal for posting internships, applying to roles, and
                 tracking every application. Role-based dashboards keep students, companies, and
                 admins focused on what matters.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild size="lg" variant="secondary">
+              <div className="mt-8 flex flex-wrap gap-3 animate-slide-up">
+                <Button asChild size="lg" variant="secondary" className="hover-lift shadow-lg">
                   <Link to="/internships">
                     Browse internships <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -58,7 +59,7 @@ function Index() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="border-white/40 bg-white/10 text-primary-foreground hover:bg-white/20"
+                  className="hover-lift border-white/40 bg-white/10 text-primary-foreground hover:bg-white/20"
                 >
                   <Link to="/register">Create an account</Link>
                 </Button>
@@ -92,16 +93,17 @@ function Index() {
                 title: "Admins",
                 desc: "Approve companies, monitor activity, manage listings, and view portal-wide analytics.",
               },
-            ].map((r) => (
+            ].map((r, idx) => (
               <div
                 key={r.title}
-                className="rounded-2xl border border-border/60 bg-card p-6 shadow-[var(--shadow-soft)] transition hover:shadow-[var(--shadow-elevated)]"
+                className="hover-lift group rounded-2xl border border-border/60 bg-card p-6 shadow-[var(--shadow-soft)] animate-slide-up"
+                style={{ animationDelay: `${idx * 80}ms` }}
               >
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-                  <r.icon className="h-5 w-5" />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-accent text-primary transition-transform group-hover:scale-110">
+                  <r.icon className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-semibold">{r.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{r.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{r.desc}</p>
               </div>
             ))}
           </div>

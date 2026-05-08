@@ -47,8 +47,9 @@ function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
-      <main className="flex flex-1 items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md rounded-2xl border border-border/60 bg-card p-8 shadow-[var(--shadow-elevated)]">
+      <main className="relative flex flex-1 items-center justify-center px-4 py-12">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_60%)]" />
+        <div className="animate-scale-in w-full max-w-md rounded-2xl border border-border/60 bg-card p-8 shadow-[var(--shadow-elevated)]">
           <div className="mb-6 flex items-center gap-2">
             <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Briefcase className="h-5 w-5" />
@@ -72,7 +73,7 @@ function LoginPage() {
                 {error}
               </div>
             )}
-            <Button type="submit" className="w-full">Sign in</Button>
+            <Button type="submit" className="hover-lift w-full">Sign in</Button>
           </form>
           <div className="mt-4 text-center text-sm text-muted-foreground">
             New here? <Link to="/register" className="font-medium text-primary hover:underline">Create an account</Link>

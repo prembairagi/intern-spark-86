@@ -69,8 +69,9 @@ function RegisterPage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
-      <main className="flex flex-1 items-center justify-center px-4 py-12">
-        <div className="w-full max-w-lg rounded-2xl border border-border/60 bg-card p-8 shadow-[var(--shadow-elevated)]">
+      <main className="relative flex flex-1 items-center justify-center px-4 py-12">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_60%)]" />
+        <div className="animate-scale-in w-full max-w-lg rounded-2xl border border-border/60 bg-card p-8 shadow-[var(--shadow-elevated)]">
           <h1 className="text-xl font-semibold">Create your account</h1>
           <p className="text-sm text-muted-foreground">Pick the role that fits you best.</p>
 
@@ -145,7 +146,7 @@ function RegisterPage() {
                 {error}
               </div>
             )}
-            <Button type="submit" className="w-full">Create account</Button>
+            <Button type="submit" className="hover-lift w-full">Create account</Button>
           </form>
 
           <div className="mt-4 text-center text-sm text-muted-foreground">
