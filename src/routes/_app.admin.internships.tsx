@@ -23,7 +23,7 @@ function AdminInternshipsPage() {
     <div>
       <PageHeader title="All internships" description="Moderate listings across the portal." />
       {data.internships.length === 0 ? <EmptyState title="No internships yet" /> : (
-        <div className="overflow-hidden rounded-xl border border-border/60 bg-card">
+        <div className="overflow-x-auto rounded-xl border border-border/60 bg-card">
           <Table>
             <TableHeader><TableRow><TableHead>Title</TableHead><TableHead>Company</TableHead><TableHead>Domain</TableHead><TableHead>Mode</TableHead><TableHead className="text-right">Actions</TableHead></TableRow></TableHeader>
             <TableBody>

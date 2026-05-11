@@ -27,7 +27,7 @@ function ApplicationsPage() {
           action={<Button asChild><Link to="/internships">Browse internships</Link></Button>}
         />
       ) : (
-        <div className="overflow-hidden rounded-xl border border-border/60 bg-card">
+        <div className="overflow-x-auto rounded-xl border border-border/60 bg-card">
           <Table>
             <TableHeader>
               <TableRow>

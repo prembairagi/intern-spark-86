@@ -14,7 +14,7 @@ function AdminStudentsPage() {
     <div>
       <PageHeader title="Students" description="Registered student accounts." />
       {rows.length === 0 ? <EmptyState title="No students yet" /> : (
-        <div className="overflow-hidden rounded-xl border border-border/60 bg-card">
+        <div className="overflow-x-auto rounded-xl border border-border/60 bg-card">
           <Table>
             <TableHeader><TableRow><TableHead>Name</TableHead><TableHead>Email</TableHead><TableHead>University</TableHead><TableHead>Skills</TableHead></TableRow></TableHeader>
             <TableBody>

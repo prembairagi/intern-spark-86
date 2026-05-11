@@ -26,7 +26,7 @@ function AdminCompaniesPage() {
     <div>
       <PageHeader title="Companies" description="Review, approve, and manage companies." />
       {data.companyProfiles.length === 0 ? <EmptyState title="No companies yet" /> : (
-        <div className="overflow-hidden rounded-xl border border-border/60 bg-card">
+        <div className="overflow-x-auto rounded-xl border border-border/60 bg-card">
           <Table>
             <TableHeader><TableRow><TableHead>Company</TableHead><TableHead>Industry</TableHead><TableHead>Status</TableHead><TableHead className="text-right">Actions</TableHead></TableRow></TableHeader>
             <TableBody>
