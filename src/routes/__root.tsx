@@ -7,6 +7,9 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { Toaster } from "@/components/ui/sonner";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 import appCss from "../styles.css?url";
 
@@ -120,9 +123,21 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("imp_demo_notice")) return;
+    sessionStorage.setItem("imp_demo_notice", "1");
+    toast("Demo mode", {
+      description:
+        "Data is stored in your browser only. Clearing site storage will reset everything.",
+      duration: 6000,
+    });
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <Toaster richColors position="top-right" />
     </QueryClientProvider>
   );
 }
