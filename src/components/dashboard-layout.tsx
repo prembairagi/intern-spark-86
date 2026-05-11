@@ -124,6 +124,7 @@ export function DashboardLayout({
 }) {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     if (!user) {
@@ -153,7 +154,7 @@ export function DashboardLayout({
               </Button>
             </div>
           </header>
-          <main key={user.id} className="animate-fade-in flex-1 p-4 sm:p-6 lg:p-8">
+          <main key={pathname} className="animate-fade-in flex-1 p-4 sm:p-6 lg:p-8">
             <Outlet />
           </main>
         </div>

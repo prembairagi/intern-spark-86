@@ -42,7 +42,7 @@ function ApplicantsPage() {
       {apps.length === 0 ? (
         <EmptyState title="No applicants yet" description="Once students apply, they'll appear here." />
       ) : (
-        <div className="overflow-hidden rounded-xl border border-border/60 bg-card">
+        <div className="overflow-x-auto rounded-xl border border-border/60 bg-card">
           <Table>
             <TableHeader>
               <TableRow>

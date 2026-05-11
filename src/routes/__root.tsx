@@ -7,6 +7,9 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { Toaster } from "@/components/ui/sonner";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 import appCss from "../styles.css?url";
 
@@ -72,23 +75,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "internship management portal" },
-      { name: "description", content: "An internship management portal for students, companies, and admins." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "internship management portal" },
-      { property: "og:description", content: "An internship management portal for students, companies, and admins." },
+      { title: "InternHub – Internship Management Portal" },
+      { name: "description", content: "A role-based internship portal for students, companies, and admins. Browse internships, manage applications, and track hiring pipelines." },
+      { name: "author", content: "Prem Bairagi" },
+      { property: "og:title", content: "InternHub – Internship Management Portal" },
+      { property: "og:description", content: "A role-based internship portal for students, companies, and admins. Browse internships, manage applications, and track hiring pipelines." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "internship management portal" },
-      { name: "twitter:description", content: "An internship management portal for students, companies, and admins." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "InternHub – Internship Management Portal" },
+      { name: "twitter:description", content: "A role-based internship portal for students, companies, and admins." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b41c042c-2389-4543-b38c-ef02175535fc/id-preview-b3c82bd6--31fdc87a-8794-4e03-ab9e-b8264d66e658.lovable.app-1778226502198.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b41c042c-2389-4543-b38c-ef02175535fc/id-preview-b3c82bd6--31fdc87a-8794-4e03-ab9e-b8264d66e658.lovable.app-1778226502198.png" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
       {
-        rel: "stylesheet",
-        href: appCss,
+        rel: "icon",
+        type: "image/svg+xml",
+        href:
+          "data:image/svg+xml;utf8," +
+          encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="%234f46e5"/><stop offset="1" stop-color="%230ea5e9"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(%23g)"/><path d="M20 24h24v4H20zm0 8h24v14a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V32zm8-10v-2a4 4 0 0 1 4-4h0a4 4 0 0 1 4 4v2" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+          ),
       },
     ],
   }),
@@ -115,9 +123,21 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("imp_demo_notice")) return;
+    sessionStorage.setItem("imp_demo_notice", "1");
+    toast("Demo mode", {
+      description:
+        "Data is stored in your browser only. Clearing site storage will reset everything.",
+      duration: 6000,
+    });
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <Toaster richColors position="top-right" />
     </QueryClientProvider>
   );
 }
