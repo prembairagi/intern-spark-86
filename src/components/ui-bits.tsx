@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { Inbox } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function PageHeader({
   title,
@@ -56,13 +58,18 @@ export function EmptyState({
   title,
   description,
   action,
+  icon,
 }: {
   title: string;
   description?: string;
   action?: ReactNode;
+  icon?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-10 text-center">
+    <div className="animate-fade-in flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-12 text-center">
+      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary/10 to-accent text-primary">
+        {icon ?? <Inbox className="h-7 w-7" />}
+      </div>
       <div className="text-base font-semibold text-foreground">{title}</div>
       {description && (
         <p className="mt-1 max-w-md text-sm text-muted-foreground">{description}</p>
@@ -70,4 +77,22 @@ export function EmptyState({
       {action && <div className="mt-4">{action}</div>}
     </div>
   );
+}
+
+export function CardSkeletonGrid({ count = 4 }: { count?: number }) {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {Array.from({ length: count }).map((_, i) => (
+        <div key={i} className="rounded-xl border border-border/60 bg-card p-5">
+          <Skeleton className="h-4 w-24" />
+          <Skeleton className="mt-4 h-8 w-16" />
+          <Skeleton className="mt-2 h-3 w-32" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function ScrollableTable({ children }: { children: ReactNode }) {
+  return <div className="-mx-4 overflow-x-auto sm:mx-0">{children}</div>;
 }
